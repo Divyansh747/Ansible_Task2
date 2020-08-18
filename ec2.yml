@@ -2,4 +2,19 @@
   vars_files:
   - credentials.yml
   tasks:
+  - name: launch linux os in aws
+    ec2:
+        key_name: "aws-os-test1"
+        instance_type: "t2.micro"
+        image: "ami-0ebc1ac48dfd14136"
+        wait: yes
+        count: 1
+        vpc_subnet_id: "subnet-52cff53a"
+        assign_public_ip: yes
+        region: "ap-south-1"
+        state: present
+        group_id: "sg-06c4ced03ae7ca57b"
+        aws_access_key: "{{ username }}"
+        aws_secret_key: "{{ userpass }}"
+    register: ec2
 
