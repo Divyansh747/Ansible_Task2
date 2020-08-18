@@ -22,4 +22,10 @@
       hostname: "{{ item.public_ip }}"
       groupname: ec2_machine
     with_items: "{{ ec2.instances }}"
+  - name: wait for SSH 
+    wait_for:
+      host: "{{ item.public_ip }}"
+      port: 22
+      state:  started
+    with_items: "{{ ec2.instances }}"
 
